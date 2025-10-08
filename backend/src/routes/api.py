@@ -32,7 +32,7 @@ MAX_LEADS_PER_UPLOAD = 50000
 current_pipeline: ProcessingPipeline | None = None
 
 
-@router.post("/upload-leads")
+@router.post("/upload-leads", response_model=List[ScoredLead])
 async def upload_leads(file: UploadFile = File(...)):
     """
     Upload CSV file with leads, process through ML pipeline, and return scored leads.
@@ -264,14 +264,11 @@ async def upload_leads(file: UploadFile = File(...)):
             leads_storage = pipeline_result.data
             
             logger.info(f"Pipeline completed: {pipeline_result.output_records} leads processed in {pipeline_result.total_duration_seconds:.2f}s")
+            logger.info(f"Quality Report: {pipeline_result.success_rate:.1f}% success rate, {len(pipeline_result.progress.warnings)} warnings, {len(pipeline_result.progress.errors)} errors")
             
-            # Return processed leads with quality report
-            return {
-                "leads": pipeline_result.data,
-                "quality_report": pipeline_result.quality_report,
-                "processing_time": pipeline_result.total_duration_seconds,
-                "success_rate": pipeline_result.success_rate
-            }
+            # Return leads array for backward compatibility with frontend
+            # Quality report is logged but not returned to avoid breaking frontend
+            return pipeline_result.data
             
         except Exception as e:
             logger.error(f"Pipeline execution failed: {str(e)}")
