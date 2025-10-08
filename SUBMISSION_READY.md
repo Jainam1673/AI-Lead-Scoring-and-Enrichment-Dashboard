@@ -90,7 +90,7 @@
 ## 📧 Submission Email (READY TO SEND)
 
 ```
-Subject: AI-Readiness Challenge Submission - Jainam Patel
+Subject: AI-Readiness Challenge Submission - Jainam Jadav
 
 Dear Caprae Capital Team,
 
@@ -143,7 +143,7 @@ I look forward to discussing how this solution can create immediate
 value for your portfolio companies.
 
 Best regards,
-Jainam Patel
+Jainam Jadav
 
 📧 Email: [Your Email]
 🔗 GitHub: https://github.com/Jainam1673
