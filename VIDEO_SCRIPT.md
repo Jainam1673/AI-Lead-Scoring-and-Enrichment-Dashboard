@@ -8,7 +8,7 @@
 
 **[Show title slide with project name]**
 
-> "Hi, I'm Jainam Patel, and I'm presenting my AI Lead Scoring & Enrichment Dashboard for the Caprae Capital AI-Readiness Challenge."
+> "Hi, I'm Jainam Jadav, and I'm presenting my AI Lead Scoring & Enrichment Dashboard for the Caprae Capital AI-Readiness Challenge."
 
 > "Instead of replicating SaaSQuatchLeads' scraping functionality, I identified the critical missing piece: **What do you do with thousands of raw scraped leads?**"
 
@@ -197,7 +197,7 @@ If live recording is challenging:
 ```
 AI Lead Scoring & Enrichment Dashboard
 Caprae Capital AI-Readiness Challenge
-By: Jainam Patel
+By: Jainam Jadav
 ```
 
 ### Problem Slide (5 sec)
