@@ -3,15 +3,27 @@ from fastapi.responses import JSONResponse, StreamingResponse
 import pandas as pd
 import io
 import json
+import logging
 from typing import List
 from ..models.lead import Lead, ScoredLead
 from ..utils.scoring import score_leads
 from ..utils.enrichment import enrich_leads
 
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
 router = APIRouter()
 
 # In-memory storage for demo (in production, use a database)
 leads_storage: List[ScoredLead] = []
+
+# Configuration
+MAX_UPLOAD_SIZE_MB = 50
+MAX_LEADS_PER_UPLOAD = 50000
 
 
 @router.post("/upload-leads", response_model=list[ScoredLead])
@@ -20,24 +32,49 @@ async def upload_leads(file: UploadFile = File(...)):
     Upload CSV file with leads, enrich them, and score them.
     Expected CSV columns: name, email, company, job_title, location (optional), industry (optional)
     """
+    logger.info(f"Upload request received: {file.filename}")
+    
     if not file.filename.endswith('.csv'):
+        logger.warning(f"Invalid file type: {file.filename}")
         raise HTTPException(status_code=400, detail="Only CSV files are allowed")
     
     try:
         contents = await file.read()
+        file_size_mb = len(contents) / (1024 * 1024)
+        
+        if file_size_mb > MAX_UPLOAD_SIZE_MB:
+            logger.warning(f"File too large: {file_size_mb:.2f}MB")
+            raise HTTPException(
+                status_code=413,
+                detail=f"File too large. Maximum size is {MAX_UPLOAD_SIZE_MB}MB"
+            )
+        
+        logger.info(f"Processing file: {file_size_mb:.2f}MB")
         df = pd.read_csv(io.BytesIO(contents))
         
         # Validate required columns
         required_cols = ['name', 'email', 'company', 'job_title']
         missing_cols = [col for col in required_cols if col not in df.columns]
         if missing_cols:
+            logger.error(f"Missing columns: {missing_cols}")
             raise HTTPException(
                 status_code=400,
                 detail=f"Missing required columns: {', '.join(missing_cols)}"
             )
         
+        # Check lead count
+        if len(df) > MAX_LEADS_PER_UPLOAD:
+            logger.warning(f"Too many leads: {len(df)}")
+            raise HTTPException(
+                status_code=413,
+                detail=f"Too many leads. Maximum is {MAX_LEADS_PER_UPLOAD} per upload"
+            )
+        
+        logger.info(f"Parsing {len(df)} leads from CSV")
+        
         # Parse CSV into Lead objects
         leads = []
+        errors = []
         for idx, row in df.iterrows():
             try:
                 lead = Lead(
@@ -51,34 +88,54 @@ async def upload_leads(file: UploadFile = File(...)):
                 )
                 leads.append(lead)
             except Exception as e:
-                print(f"Error parsing row {idx}: {e}")
+                error_msg = f"Row {idx}: {str(e)}"
+                logger.warning(f"Error parsing row: {error_msg}")
+                errors.append(error_msg)
                 continue
         
         if not leads:
-            raise HTTPException(status_code=400, detail="No valid leads found in CSV")
+            logger.error("No valid leads parsed from CSV")
+            raise HTTPException(
+                status_code=400,
+                detail=f"No valid leads found in CSV. Errors: {errors[:5]}"
+            )
+        
+        logger.info(f"Successfully parsed {len(leads)} leads ({len(errors)} errors)")
         
         # Step 1: Enrich leads
+        logger.info("Enriching leads...")
         enriched_leads = enrich_leads(leads)
         
         # Step 2: Score enriched leads
+        logger.info("Scoring leads...")
         scored_leads = score_leads(enriched_leads)
         
         # Store in memory for later export
         global leads_storage
         leads_storage = scored_leads
         
+        logger.info(f"Successfully processed {len(scored_leads)} leads")
         return scored_leads
         
     except pd.errors.EmptyDataError:
+        logger.error("Empty CSV file uploaded")
         raise HTTPException(status_code=400, detail="CSV file is empty")
+    except HTTPException:
+        raise
     except Exception as e:
+        logger.exception("Unexpected error processing file")
         raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
 
 
 @router.get("/leads", response_model=list[ScoredLead])
-async def get_leads():
+async def get_leads(limit: int | None = None, offset: int = 0):
     """
-    Get all scored leads from storage.
+    Get scored leads from storage with optional pagination.
+    
+    Args:
+        limit: Maximum number of leads to return (optional)
+        offset: Number of leads to skip (default: 0)
+    
     Returns sample data from CSV if no leads uploaded yet.
     """
     if not leads_storage:
@@ -118,11 +175,19 @@ async def get_leads():
             
             # Enrich and score
             enriched = enrich_leads(sample_leads)
-            return score_leads(enriched)
+            scored = score_leads(enriched)
+            
+            # Apply pagination
+            if limit is not None:
+                return scored[offset:offset + limit]
+            return scored[offset:]
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Error loading sample data: {str(e)}")
     
-    return leads_storage
+    # Apply pagination to stored leads
+    if limit is not None:
+        return leads_storage[offset:offset + limit]
+    return leads_storage[offset:]
 
 
 @router.get("/export")

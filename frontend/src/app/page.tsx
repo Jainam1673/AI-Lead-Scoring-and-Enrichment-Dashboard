@@ -6,7 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { LeadTable, Lead } from '@/components/LeadTable';
 import { FiltersPanel, FilterState } from '@/components/FiltersPanel';
-import { Upload, Download, RefreshCw, BarChart3 } from 'lucide-react';
+import { Upload, Download, RefreshCw, BarChart3, Trash2 } from 'lucide-react';
+import { toast, Toaster } from 'sonner';
 
 export default function Home() {
   const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000';
@@ -37,20 +38,22 @@ export default function Home() {
     formData.append('file', file);
 
     try {
-  const response = await fetch(`${apiBaseUrl}/api/upload-leads`, {
+      toast.loading('Uploading and processing leads...', { id: 'upload' });
+      const response = await fetch(`${apiBaseUrl}/api/upload-leads`, {
         method: 'POST',
         body: formData,
       });
       if (response.ok) {
-  const data: Lead[] = await response.json();
-  setLeads(data);
+        const data: Lead[] = await response.json();
+        setLeads(data);
+        toast.success(`Successfully processed ${data.length} leads!`, { id: 'upload' });
       } else {
         const error = await response.json();
-        alert(`Upload failed: ${error.detail || 'Unknown error'}`);
+        toast.error(`Upload failed: ${error.detail || 'Unknown error'}`, { id: 'upload' });
       }
     } catch (error) {
       console.error(error);
-      alert('Error uploading file. Make sure the backend is running on port 8000.');
+      toast.error('Error uploading file. Make sure the backend is running.', { id: 'upload' });
     }
     setLoading(false);
   };
@@ -58,21 +61,26 @@ export default function Home() {
   const fetchLeads = async () => {
     setLoading(true);
     try {
-  const response = await fetch(`${apiBaseUrl}/api/leads`);
+      toast.loading('Loading sample leads...', { id: 'fetch' });
+      const response = await fetch(`${apiBaseUrl}/api/leads`);
       if (response.ok) {
         const data: Lead[] = await response.json();
         setLeads(data);
+        toast.success(`Loaded ${data.length} sample leads!`, { id: 'fetch' });
+      } else {
+        toast.error('Failed to load leads', { id: 'fetch' });
       }
     } catch (error) {
       console.error(error);
-      alert('Error fetching leads. Make sure the backend is running.');
+      toast.error('Error fetching leads. Make sure the backend is running.', { id: 'fetch' });
     }
     setLoading(false);
   };
 
   const exportLeads = async () => {
     try {
-  const response = await fetch(`${apiBaseUrl}/api/export`);
+      toast.loading('Exporting leads...', { id: 'export' });
+      const response = await fetch(`${apiBaseUrl}/api/export`);
       if (response.ok) {
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
@@ -83,12 +91,33 @@ export default function Home() {
         a.click();
         window.URL.revokeObjectURL(url);
         document.body.removeChild(a);
+        toast.success('Leads exported successfully!', { id: 'export' });
       } else {
-        alert('No leads to export');
+        toast.error('No leads to export', { id: 'export' });
       }
     } catch (error) {
       console.error(error);
-      alert('Error exporting leads');
+      toast.error('Error exporting leads', { id: 'export' });
+    }
+  };
+
+  const clearLeads = async () => {
+    if (!confirm('Are you sure you want to clear all leads?')) return;
+    
+    try {
+      toast.loading('Clearing leads...', { id: 'clear' });
+      const response = await fetch(`${apiBaseUrl}/api/leads`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        setLeads([]);
+        toast.success('All leads cleared!', { id: 'clear' });
+      } else {
+        toast.error('Failed to clear leads', { id: 'clear' });
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error('Error clearing leads', { id: 'clear' });
     }
   };
 
@@ -137,6 +166,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+      <Toaster position="top-right" richColors />
       <div className="container mx-auto p-6 space-y-6">
         {/* Header */}
         <div className="space-y-2">
@@ -185,6 +215,15 @@ export default function Home() {
               >
                 <Download className="h-4 w-4" />
                 Export CSV
+              </Button>
+              <Button
+                onClick={clearLeads}
+                variant="outline"
+                disabled={leads.length === 0}
+                className="gap-2 border-red-800 text-red-400 hover:bg-red-950/50 hover:text-red-300"
+              >
+                <Trash2 className="h-4 w-4" />
+                Clear Leads
               </Button>
             </div>
           </CardContent>
