@@ -48,9 +48,6 @@ requires-dist = [
     { name = "uvicorn", specifier = ">=0.37.0" },
 ]
 
-[package.metadata.requires-dev]
-dev = []
-
 [[package]]
 name = "click"
 version = "8.3.0"
