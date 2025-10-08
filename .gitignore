@@ -43,3 +43,6 @@ coverage/
 
 # Build artifacts
 *.tsbuildinfo
+
+# Large datasets (raw Kaggle data - processed files are committed)
+kaggle-datasets/
