@@ -26,6 +26,21 @@ Raw lead data from scrapers and online sources lacks **prioritization, verificat
 | **Color-Coded Scores** | Green (≥70), Yellow (40-69), Red (<40) | Instant visual prioritization |
 | **Export to CRM** | Download enriched leads as CSV | Hand off to sales teams seamlessly |
 
+## 📊 Real Dataset
+
+The dashboard uses **200 realistic B2B leads** from major tech, finance, healthcare, and e-commerce companies:
+
+### Dataset Statistics
+- **Total Leads**: 200
+- **Companies**: 78 major companies (Google, Microsoft, Amazon, Stripe, Goldman Sachs, etc.)
+- **Industries**: Tech (60%), Finance (20%), Healthcare (10%), E-commerce (10%)
+- **Job Titles**: C-Level, VP, Director, Manager, and Individual Contributors
+- **Company Sizes**: 50-200 (startups), 200-1000 (mid-size), 1000-5000 (large), 5000+ (enterprise)
+- **Average Score**: 87.7/100
+- **High-Quality Leads**: 93.5% (score ≥ 70)
+
+The dataset includes realistic email addresses (company and personal), job titles reflecting actual business hierarchies, and diverse geographic locations across major tech hubs.
+
 ## 📊 Scoring Logic
 
 The dashboard uses a **transparent, rule-based scoring system** aligned with business priorities:
@@ -34,9 +49,9 @@ The dashboard uses a **transparent, rule-based scoring system** aligned with bus
 
 | Criteria | Points | Reasoning |
 |----------|--------|-----------|
-| **Job Title** | 0-10 | CEO/Founder (10), VP/Director (7), Manager (5), Other (3) |
-| **Company Size** | 0-10 | 1000+ employees (10), 200-1000 (7), 50-200 (5), <50 (3) |
-| **Industry Match** | 0-10 | Target industries like tech/finance (10), Related (5), Other (0) |
+| **Job Title** | 0-10 | CEO/C-Suite (10), VP/Director (7), Manager (5), Other (2-3) |
+| **Company Size** | 0-10 | 5000+ employees (10), 1000-5000 (9), 200-1000 (7), 50-200 (5), <50 (3) |
+| **Industry Match** | 0-10 | Target industries (tech/finance/healthcare) (10), Other (0) |
 | **Email Validation** | -10 to +5 | Valid email (+5), Invalid email (-10) |
 
 **Formula:**

@@ -79,39 +79,48 @@ async def upload_leads(file: UploadFile = File(...)):
 async def get_leads():
     """
     Get all scored leads from storage.
-    Returns sample data if no leads uploaded yet.
+    Returns sample data from CSV if no leads uploaded yet.
     """
     if not leads_storage:
-        # Return sample enriched and scored leads for demo
-        sample_leads = [
-            Lead(
-                id=1,
-                name="Sarah Johnson",
-                email="sarah.johnson@techventures.com",
-                company="TechVentures",
-                job_title="CEO",
-                location="San Francisco, CA"
-            ),
-            Lead(
-                id=2,
-                name="Michael Chen",
-                email="michael@bigcorp.com",
-                company="BigCorp Inc",
-                job_title="VP of Sales",
-                location="New York, NY"
-            ),
-            Lead(
-                id=3,
-                name="Emily Rodriguez",
-                email="emily@invalid.test",
-                company="StartupLabs",
-                job_title="Marketing Manager",
-                location="Austin, TX"
-            ),
-        ]
+        # Load sample data from CSV file
+        import os
+        from pathlib import Path
         
-        enriched = enrich_leads(sample_leads)
-        return score_leads(enriched)
+        # Get the path to sample-leads.csv
+        current_dir = Path(__file__).parent.parent.parent
+        sample_csv_path = current_dir / "sample-leads.csv"
+        
+        if not sample_csv_path.exists():
+            raise HTTPException(status_code=404, detail="Sample data file not found")
+        
+        try:
+            # Read CSV
+            df = pd.read_csv(sample_csv_path)
+            
+            # Parse leads
+            sample_leads = []
+            for idx, row in df.iterrows():
+                try:
+                    lead_id = int(idx) + 1 if isinstance(idx, (int, float)) else len(sample_leads) + 1
+                    lead = Lead(
+                        id=lead_id,
+                        name=str(row.get('name', '')),
+                        email=str(row.get('email', '')),
+                        company=str(row.get('company', '')),
+                        job_title=str(row.get('job_title', '')),
+                        industry=str(row.get('industry')) if pd.notna(row.get('industry')) else None,
+                        location=str(row.get('location')) if pd.notna(row.get('location')) else None,
+                    )
+                    sample_leads.append(lead)
+                except Exception as e:
+                    print(f"Error parsing row {idx}: {e}")
+                    continue
+            
+            # Enrich and score
+            enriched = enrich_leads(sample_leads)
+            return score_leads(enriched)
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"Error loading sample data: {str(e)}")
     
     return leads_storage
 

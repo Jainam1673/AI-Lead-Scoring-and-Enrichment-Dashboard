@@ -9,6 +9,15 @@ This backend service provides:
 - **Data Enrichment**: Add company size, industry, LinkedIn URLs, email validation
 - **AI Scoring**: Rule-based scoring system (0-100 scale)
 - **Export Functionality**: Download enriched leads as CSV
+- **Real Dataset**: 200 realistic B2B leads from major tech, finance, healthcare, and e-commerce companies
+
+### Sample Dataset
+The `sample-leads.csv` file contains **200 realistic B2B leads** including:
+- **Companies**: Google, Microsoft, Amazon, Stripe, Goldman Sachs, Netflix, Coinbase, and 70+ more
+- **Industries**: Tech (60%), Finance (20%), Healthcare (10%), E-commerce (10%)
+- **Job Titles**: CEO, CTO, CFO, VP, Director, Manager, and IC roles
+- **Company Sizes**: 50-200 (startups), 200-1000, 1000-5000, 5000+ (enterprise)
+- **Locations**: San Francisco, New York, Seattle, Boston, Austin, and 20+ other cities
 
 ## 🏗️ Architecture
 

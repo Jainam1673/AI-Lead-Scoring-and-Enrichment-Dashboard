@@ -1,21 +1,201 @@
-name,email,company,job_title,location,industry
-Sarah Johnson,sarah.johnson@techventures.com,TechVentures,CEO,San Francisco CA,
-Michael Chen,michael@microsoft.com,Microsoft Corporation,VP of Sales,Seattle WA,
-Emily Rodriguez,emily@invalid.test,StartupLabs,Marketing Manager,Austin TX,
-David Kim,david.kim@capitalfund.com,Capital Fund Partners,Founder,New York NY,
-Jessica Martinez,jessica@healthtech.io,HealthTech Solutions,CTO,Boston MA,
-Robert Taylor,robert@consulting.com,Taylor Consulting LLC,Director of Operations,Chicago IL,
-Amanda White,amanda.white@amazon.com,Amazon Inc,Senior Product Manager,Seattle WA,
-Christopher Lee,chris@startup.io,InnovateLabs,Co-Founder,San Francisco CA,
-Michelle Brown,michelle@fake.com,Brown Ventures,VP of Marketing,Los Angeles CA,
-James Wilson,james.wilson@bigbank.com,BigBank Corporation,Chief Technology Officer,New York NY,
-Lisa Anderson,lisa@smallagency.com,Creative Agency Studio,Account Manager,Portland OR,
-Daniel Garcia,daniel@solutions.io,Tech Solutions Inc,Head of Engineering,Austin TX,
-Jennifer Martin,jennifer@example.com,Example Corp,Sales Coordinator,Miami FL,
-Ryan Thompson,ryan.thompson@google.com,Google LLC,Engineering Manager,Mountain View CA,
-Angela Davis,angela@mediagroup.com,Media Group Ltd,Marketing Director,Los Angeles CA,
-Kevin Martinez,kevin@ecommerce.shop,ShopNow Retail,E-commerce Manager,Denver CO,
-Nicole Jackson,nicole.jackson@ibm.com,IBM Corporation,VP of Cloud Services,Raleigh NC,
-Brian White,brian@ventures.capital,Acme Ventures,Partner,San Francisco CA,
-Stephanie Harris,stephanie@pharma.health,PharmaHealth Inc,Director of R&D,Cambridge MA,
-Jason Clark,jason@tech.startup,NexGen Technologies,Founder & CEO,Palo Alto CA
+name,email,company,job_title,industry,location
+Susan Thomas,susan.thomas@protonmail.com,Coinbase,Marketing Specialist,finance,San Francisco
+Matthew Gomez,matthew.gomez693@protonmail.com,Zoom,Director of Business Development,tech,San Jose
+Jonathan Reed,jreed@mongodb.com,MongoDB,VP of Engineering,tech,New York
+Nicholas Perez,nicholas.perez@lyft.com,Lyft,Director of Customer Success,e-commerce,San Francisco
+Donna White,donna.white@anthropic.com,Anthropic,Chief Data Officer,tech,San Francisco
+Karen Kelly,karen.kelly@protonmail.com,Netflix,COO,tech,Los Gatos
+Matthew Anderson,matthew.anderson@icloud.com,American Express,Engineering Manager,finance,New York
+Betty Ward,bettyw@amazon.com,Amazon,Data Scientist,tech,Seattle
+Richard King,richard.king@oracle.com,Oracle,Chief Data Officer,tech,Austin
+Steven Cruz,stevenc@servicenow.com,ServiceNow,Director of Marketing,tech,Santa Clara
+Thomas White,thomasw@gitlab.com,GitLab,Account Executive,tech,San Francisco
+Brenda Peterson,bpeterson@hashicorp.com,HashiCorp,VP of Marketing,tech,San Francisco
+Anna Robinson,anna.robinson102@protonmail.com,Supabase,CEO,tech,San Francisco
+Daniel Harris,daniel.harris@hotmail.com,eBay,Engineering Manager,e-commerce,San Jose
+Patricia Williams,patriciawilliams@yahoo.com,Scale AI,Account Manager,tech,San Francisco
+Rebecca Kim,rebeccak@huggingface.com,Hugging Face,VP of Product,tech,New York
+Joseph Martinez,josephmartinez@hotmail.com,American Express,Account Manager,finance,New York
+Betty Davis,bdavis@doordash.com,DoorDash,Senior Product Designer,e-commerce,San Francisco
+Paul Morales,paulm@oscarhealth.com,Oscar Health,Chief Data Officer,healthcare,New York
+Amanda Green,amanda.green@cvshealth.com,CVS Health,Marketing Manager,healthcare,Woonsocket
+Laura Allen,laura.allen@datadog.com,Datadog,Director of Sales,tech,New York
+Jason Brown,jason.brown32@protonmail.com,Adobe,Director of Product,tech,San Jose
+Betty Hall,bhall@replicate.com,Replicate,Director of Business Development,tech,San Francisco
+Sarah Martin,sarah.martin@oracle.com,Oracle,Data Scientist,tech,Austin
+Steven Ortiz,steven.ortiz@americanexpress.com,American Express,VP of Operations,finance,New York
+Charles Brown,cbrown@microsoft.com,Microsoft,Business Analyst,tech,Redmond
+Margaret Walker,margaretwalker@icloud.com,DoorDash,Director of Engineering,e-commerce,San Francisco
+David Williams,david.williams762@protonmail.com,American Express,Marketing Specialist,finance,New York
+William Gomez,wgomez@unitedhealth.com,UnitedHealth,Marketing Manager,healthcare,Minneapolis
+Susan Hernandez,susanh@adobe.com,Adobe,VP of Engineering,tech,San Jose
+Laura Allen,lauraallen@gmail.com,Slack,COO,tech,San Francisco
+Richard Garcia,richardgarcia@icloud.com,DoorDash,Account Manager,e-commerce,San Francisco
+Edward Smith,edwards@mongodb.com,MongoDB,Senior Sales Executive,tech,New York
+Helen Smith,helens@weightsandbiases.com,Weights & Biases,Senior Product Designer,tech,San Francisco
+Brenda Morgan,bmorgan@weightsandbiases.com,Weights & Biases,Director of Product,tech,San Francisco
+Barbara Thomas,barbarat@dropbox.com,Dropbox,Business Development Manager,tech,San Francisco
+James Murphy,jmurphy@slack.com,Slack,Lead Software Engineer,tech,San Francisco
+Jessica Lewis,jessica.lewis509@yahoo.com,Oracle,Director of Sales,tech,Austin
+Elizabeth Cooper,ecooper@zendesk.com,Zendesk,Customer Success Manager,tech,San Francisco
+Daniel Cox,dcox@databricks.com,Databricks,CTO,tech,San Francisco
+William Howard,whoward@hubspot.com,HubSpot,VP of Marketing,tech,Cambridge
+Shirley Cooper,shirleyc@paypal.com,PayPal,Chief Revenue Officer,finance,San Jose
+Linda Rivera,linda.rivera@icloud.com,Oscar Health,Director of Marketing,healthcare,New York
+John Sanchez,john.sanchez@plaid.com,Plaid,Senior Product Designer,finance,San Francisco
+James Miller,jmiller@vercel.com,Vercel,Product Manager,tech,San Francisco
+Paul Davis,paul.davis@vercel.com,Vercel,Data Scientist,tech,San Francisco
+Jessica Evans,jessicaevans@hotmail.com,IBM,Senior Product Designer,tech,Armonk
+David Richardson,drichardson@meta.com,Meta,Business Development Manager,tech,Menlo Park
+Patricia Brown,patricia.brown653@outlook.com,Citigroup,CFO,finance,New York
+Helen Cooper,helenc@meta.com,Meta,Business Development Manager,tech,Menlo Park
+George Flores,gflores@ibm.com,IBM,VP of Product,tech,Armonk
+Andrew Turner,andrew.turner246@icloud.com,Zoom,Business Analyst,tech,San Jose
+Deborah Brown,deborahb@microsoft.com,Microsoft,Business Development Manager,tech,Redmond
+Brenda Morris,brendamorris@yahoo.com,DoorDash,Senior Product Designer,e-commerce,San Francisco
+Emily Phillips,emily.phillips133@icloud.com,Linear,Director of Customer Success,tech,San Francisco
+Ronald Ortiz,rortiz@huggingface.com,Hugging Face,VP of Operations,tech,New York
+Stephen Baker,stephen.baker@yahoo.com,Hugging Face,VP of Operations,tech,New York
+Sharon Campbell,sharon.campbell@chime.com,Chime,Director of Marketing,finance,San Francisco
+Helen Davis,helen.davis829@yahoo.com,Citigroup,Marketing Manager,finance,New York
+Nancy Walker,nancywalker@outlook.com,Johnson & Johnson,Senior Sales Executive,healthcare,New Brunswick
+Ronald Rivera,rrivera@hubspot.com,HubSpot,Director of Engineering,tech,Cambridge
+Kathleen Cooper,kcooper@lyft.com,Lyft,VP of Marketing,e-commerce,San Francisco
+Thomas Walker,thomas.walker@outlook.com,AbbVie,Marketing Specialist,healthcare,Chicago
+Nicholas Rogers,nicholas.rogers974@hotmail.com,Oracle,Chief Revenue Officer,tech,Austin
+Laura Miller,laura.miller@protonmail.com,Instacart,CFO,e-commerce,San Francisco
+Rebecca Davis,rebeccad@monday.com.com,monday.com,Sales Manager,tech,Tel Aviv
+Robert Ortiz,rortiz@wellsfargo.com,Wells Fargo,VP of Product,finance,San Francisco
+Ashley Perez,ashley.perez@atlassian.com,Atlassian,Engineering Manager,tech,Sydney
+Kathleen Lewis,kathleenlewis@hotmail.com,Square,Chief Revenue Officer,finance,San Francisco
+Ryan Kim,ryan.kim@dropbox.com,Dropbox,Chief Revenue Officer,tech,San Francisco
+Laura Jackson,laurajackson@icloud.com,Plaid,VP of Engineering,finance,San Francisco
+Carol Anderson,carol.anderson977@outlook.com,Wayfair,Director of Customer Success,e-commerce,Boston
+Melissa Williams,melissa.williams@icloud.com,Zoom,VP of Operations,tech,San Jose
+Sandra Baker,sbaker@linear.com,Linear,Account Executive,tech,San Francisco
+Steven Allen,stevenallen@protonmail.com,DoorDash,Director of Sales,e-commerce,San Francisco
+Sharon Lee,sharonlee@outlook.com,Wells Fargo,CTO,finance,San Francisco
+Shirley Stewart,shirley.stewart@mongodb.com,MongoDB,VP of Sales,tech,New York
+Margaret White,margaretwhite@icloud.com,Instacart,VP of Marketing,e-commerce,San Francisco
+Amanda Cooper,amanda.cooper@yahoo.com,Shopify,Account Executive,e-commerce,Ottawa
+Anthony Richardson,anthony.richardson@zoom.com,Zoom,Director of Engineering,tech,San Jose
+Ashley Johnson,ashley.johnson@lyft.com,Lyft,VP of Sales,e-commerce,San Francisco
+Donna Bailey,donna.bailey@citigroup.com,Citigroup,Director of Customer Success,finance,New York
+Helen King,helenk@docusign.com,DocuSign,CFO,tech,San Francisco
+Brandon Miller,brandon.miller894@yahoo.com,CVS Health,CMO,healthcare,Woonsocket
+Sarah Martinez,sarah.martinez@icloud.com,Square,Account Executive,finance,San Francisco
+Jacob Torres,jacobt@johnsonandjohnson.com,Johnson & Johnson,Director of Customer Success,healthcare,New Brunswick
+Anthony Perez,anthony.perez@icloud.com,monday.com,COO,tech,Tel Aviv
+Sarah Jones,sarahjones@protonmail.com,Datadog,Customer Success Manager,tech,New York
+Sarah Jackson,sjackson@onemedical.com,One Medical,Senior Sales Executive,healthcare,San Francisco
+Brian Hill,brian.hill@pfizer.com,Pfizer,Director of Customer Success,healthcare,New York
+Michelle Lee,michelle.lee@plaid.com,Plaid,VP of Sales,finance,San Francisco
+Deborah Diaz,ddiaz@databricks.com,Databricks,Account Manager,tech,San Francisco
+Kimberly Diaz,kimberlydiaz@outlook.com,Dropbox,Director of Marketing,tech,San Francisco
+Brian King,briank@citigroup.com,Citigroup,Senior Sales Executive,finance,New York
+Richard Carter,richardcarter@outlook.com,Supabase,Lead Software Engineer,tech,San Francisco
+Sharon Kim,skim@scaleai.com,Scale AI,VP of Product,tech,San Francisco
+Sarah Williams,sarahw@pfizer.com,Pfizer,Account Executive,healthcare,New York
+Sarah Cruz,sarahc@wellsfargo.com,Wells Fargo,Senior Sales Executive,finance,San Francisco
+Karen Thompson,karen.thompson@hotmail.com,23andMe,Product Manager,healthcare,San Francisco
+Susan Davis,sdavis@lyft.com,Lyft,COO,e-commerce,San Francisco
+Rebecca Adams,rebeccaa@replicate.com,Replicate,Marketing Manager,tech,San Francisco
+Sarah Brown,sarah.brown@snowflake.com,Snowflake,Director of Sales,tech,San Mateo
+Timothy Howard,timothyhoward@icloud.com,Instacart,Director of Sales,e-commerce,San Francisco
+Ashley Roberts,ashley.roberts@figma.com,Figma,COO,tech,San Francisco
+Amanda Gutierrez,amandag@oracle.com,Oracle,COO,tech,Austin
+Jeffrey Clark,jeffrey.clark979@outlook.com,monday.com,Chief Revenue Officer,tech,Tel Aviv
+Charles Adams,cadams@teladoc.com,Teladoc,Lead Software Engineer,healthcare,New York
+Joseph Stewart,josephstewart@outlook.com,Chime,CMO,finance,San Francisco
+Timothy Gutierrez,tgutierrez@hubspot.com,HubSpot,Director of Sales,tech,Cambridge
+William Thompson,william.thompson@protonmail.com,Amazon,CEO,tech,Seattle
+Robert Rogers,robert.rogers962@hotmail.com,Anthropic,Director of Marketing,tech,San Francisco
+Brandon Baker,brandon.baker@yahoo.com,Bank of America,Marketing Specialist,finance,Charlotte
+Nancy Kim,nancy.kim@citigroup.com,Citigroup,Director of Business Development,finance,New York
+Steven Perez,steven.perez@cvshealth.com,CVS Health,Product Manager,healthcare,Woonsocket
+Christopher Walker,christopher.walker@stripe.com,Stripe,Director of Sales,tech,San Francisco
+Angela Green,angela.green@icloud.com,Coinbase,Business Analyst,finance,San Francisco
+Gary Bailey,garybailey@yahoo.com,23andMe,Data Scientist,healthcare,San Francisco
+Ashley Lopez,ashley.lopez@morganstanley.com,Morgan Stanley,Chief Revenue Officer,finance,New York
+Eric Thomas,eric.thomas@yahoo.com,Atlassian,Customer Success Manager,tech,Sydney
+Mark Wilson,mark.wilson@replicate.com,Replicate,CMO,tech,San Francisco
+Sarah Murphy,sarahm@snowflake.com,Snowflake,Account Manager,tech,San Mateo
+Mark Thompson,mark.thompson966@protonmail.com,Slack,Marketing Manager,tech,San Francisco
+Anthony Hall,anthonyhall@hotmail.com,Plaid,Account Executive,finance,San Francisco
+James Cruz,james.cruz@mastercard.com,Mastercard,Data Scientist,finance,New York
+Joseph Evans,joseph.evans28@protonmail.com,Square,Sales Manager,finance,San Francisco
+Richard Hill,richard.hill@salesforce.com,Salesforce,Marketing Manager,tech,San Francisco
+Emma Anderson,emma.anderson@icloud.com,Anthropic,VP of Product,tech,San Francisco
+Joshua Ramos,joshua.ramos@etsy.com,Etsy,Product Manager,e-commerce,Brooklyn
+Anthony Robinson,anthony.robinson@wellsfargo.com,Wells Fargo,VP of Marketing,finance,San Francisco
+Carol Reed,carol.reed@confluent.com,Confluent,Director of Marketing,tech,Mountain View
+Carol Gomez,carol.gomez@meta.com,Meta,Director of Product,tech,Menlo Park
+Thomas Brown,thomas.brown94@hotmail.com,American Express,Product Manager,finance,New York
+Larry Lewis,llewis@zoom.com,Zoom,Sales Manager,tech,San Jose
+Amy Richardson,amyr@wayfair.com,Wayfair,Data Scientist,e-commerce,Boston
+Amanda Thompson,athompson@supabase.com,Supabase,Business Analyst,tech,San Francisco
+Timothy Gomez,timothyg@snowflake.com,Snowflake,Director of Marketing,tech,San Mateo
+Kenneth Davis,kenneth.davis755@yahoo.com,Citigroup,Director of Sales,finance,New York
+Christopher Baker,christopher.baker575@protonmail.com,Visa,CFO,finance,San Francisco
+Charles Ward,charles.ward@icloud.com,Salesforce,Chief Revenue Officer,tech,San Francisco
+Robert Perez,robertperez@yahoo.com,PayPal,Data Scientist,finance,San Jose
+Shirley Wilson,swilson@weightsandbiases.com,Weights & Biases,Director of Marketing,tech,San Francisco
+Betty Garcia,bettyg@instacart.com,Instacart,VP of Operations,e-commerce,San Francisco
+Steven Murphy,stevenm@apple.com,Apple,CTO,tech,Cupertino
+Donald Johnson,donald.johnson244@protonmail.com,One Medical,COO,healthcare,San Francisco
+Cynthia Thompson,cynthia.thompson900@protonmail.com,Coinbase,CMO,finance,San Francisco
+Shirley Hall,shirleyh@hubspot.com,HubSpot,Chief Data Officer,tech,Cambridge
+Emma Turner,emma.turner570@icloud.com,Uber,CEO,e-commerce,San Francisco
+Nicole Walker,nicole.walker@bankofamerica.com,Bank of America,Data Scientist,finance,Charlotte
+Pamela Walker,pamelaw@square.com,Square,Marketing Manager,finance,San Francisco
+Gary Rogers,garyrogers@protonmail.com,Etsy,CEO,e-commerce,Brooklyn
+Stephen Roberts,stephen.roberts@oscarhealth.com,Oscar Health,Director of Engineering,healthcare,New York
+David Rogers,davidr@oscarhealth.com,Oscar Health,Account Executive,healthcare,New York
+Brandon Green,bgreen@square.com,Square,Data Scientist,finance,San Francisco
+Emily Wilson,emilyw@coinbase.com,Coinbase,CFO,finance,San Francisco
+Kimberly Nelson,kimberly.nelson114@hotmail.com,Pfizer,VP of Marketing,healthcare,New York
+Nicholas Phillips,nicholas.phillips@cvshealth.com,CVS Health,VP of Engineering,healthcare,Woonsocket
+Brenda Ramirez,brenda.ramirez@oscarhealth.com,Oscar Health,Business Analyst,healthcare,New York
+Cynthia Clark,cynthia.clark@slack.com,Slack,Account Executive,tech,San Francisco
+Nicole Perez,nicole.perez975@icloud.com,Pfizer,Account Executive,healthcare,New York
+Helen Ramos,helen.ramos@twilio.com,Twilio,Director of Product,tech,San Francisco
+Paul Stewart,paulstewart@icloud.com,Pfizer,CFO,healthcare,New York
+Anthony Nelson,anelson@johnsonandjohnson.com,Johnson & Johnson,COO,healthcare,New Brunswick
+Brenda Davis,brenda.davis@teladoc.com,Teladoc,Senior Product Designer,healthcare,New York
+Justin Hill,jhill@netflix.com,Netflix,Chief Revenue Officer,tech,Los Gatos
+Melissa Ward,melissa.ward@outlook.com,Pfizer,VP of Operations,healthcare,New York
+Emily Robinson,emily.robinson@pfizer.com,Pfizer,CEO,healthcare,New York
+Matthew Turner,matthew.turner@23andme.com,23andMe,Chief Revenue Officer,healthcare,San Francisco
+Helen Ramirez,helenr@citigroup.com,Citigroup,Director of Marketing,finance,New York
+Amanda Garcia,amandag@meta.com,Meta,Account Executive,tech,Menlo Park
+Steven Cox,stevenc@chime.com,Chime,Engineering Manager,finance,San Francisco
+Margaret Diaz,margaretdiaz@outlook.com,Figma,VP of Operations,tech,San Francisco
+Ashley Jackson,ashley.jackson@etsy.com,Etsy,VP of Product,e-commerce,Brooklyn
+John Taylor,john.taylor95@yahoo.com,Morgan Stanley,Senior Product Designer,finance,New York
+Anthony Rogers,anthony.rogers@icloud.com,Vercel,VP of Product,tech,San Francisco
+Rebecca Taylor,rebecca.taylor@visa.com,Visa,VP of Product,finance,San Francisco
+Brandon Lewis,brandonlewis@gmail.com,Instacart,Sales Manager,e-commerce,San Francisco
+Mary Lopez,mlopez@workday.com,Workday,Account Manager,tech,Pleasanton
+Melissa Ramirez,mramirez@oracle.com,Oracle,Product Manager,tech,Austin
+Betty Bailey,bettyb@johnsonandjohnson.com,Johnson & Johnson,Director of Marketing,healthcare,New Brunswick
+Ronald Williams,ronald.williams@protonmail.com,Snowflake,Customer Success Manager,tech,San Mateo
+Barbara Parker,barbara.parker@bankofamerica.com,Bank of America,Business Analyst,finance,Charlotte
+Patricia Thompson,patricia.thompson155@outlook.com,American Express,Chief Revenue Officer,finance,New York
+Jason Reyes,jason.reyes@icloud.com,Zoom,CEO,tech,San Jose
+Lisa Reed,lreed@scaleai.com,Scale AI,Customer Success Manager,tech,San Francisco
+Donna Brown,donna.brown@etsy.com,Etsy,Director of Engineering,e-commerce,Brooklyn
+Steven Cruz,scruz@abbvie.com,AbbVie,VP of Marketing,healthcare,Chicago
+Mary Cruz,mary.cruz@databricks.com,Databricks,Director of Sales,tech,San Francisco
+Nicole Carter,ncarter@ebay.com,eBay,VP of Operations,e-commerce,San Jose
+Richard Sanchez,richards@apple.com,Apple,Business Development Manager,tech,Cupertino
+Robert Carter,robertc@goldmansachs.com,Goldman Sachs,Account Executive,finance,New York
+Mark Kim,markk@zendesk.com,Zendesk,Account Executive,tech,San Francisco
+Michelle Thomas,michelle.thomas@chime.com,Chime,Marketing Specialist,finance,San Francisco
+Jason Ortiz,jasonortiz@icloud.com,Snowflake,Director of Business Development,tech,San Mateo
+Jessica Miller,jessica.miller@hubspot.com,HubSpot,Chief Data Officer,tech,Cambridge
+Gary Peterson,gary.peterson@icloud.com,Replicate,Director of Sales,tech,San Francisco
+Joseph Wilson,josephwilson@gmail.com,Databricks,Chief Data Officer,tech,San Francisco
+Michelle Lopez,michellelopez@outlook.com,Instacart,CTO,e-commerce,San Francisco
+Ronald Nguyen,ronald.nguyen@stripe.com,Stripe,VP of Engineering,tech,San Francisco
+Jennifer Phillips,jennifer.phillips642@hotmail.com,Confluent,Marketing Specialist,tech,Mountain View
+Patricia Garcia,patricia.garcia@hotmail.com,American Express,Senior Sales Executive,finance,New York

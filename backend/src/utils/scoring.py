@@ -16,9 +16,13 @@ from ..models.lead import Lead, ScoredLead
 # Scoring weights and criteria
 JOB_TITLE_SCORES = {
     "ceo": 10,
+    "coo": 10,
+    "cto": 10,
+    "cfo": 10,
+    "cmo": 10,
     "founder": 10,
     "co-founder": 10,
-    "chief": 10,  # CTO, CFO, etc.
+    "chief": 10,  # Chief Data Officer, Chief Revenue Officer, etc.
     "president": 9,
     "vp": 7,
     "vice president": 7,
@@ -36,7 +40,9 @@ JOB_TITLE_SCORES = {
 }
 
 COMPANY_SIZE_SCORES = {
-    "1000+": 10,
+    "5000+": 10,
+    "1000-5000": 9,
+    "1000+": 10,  # Legacy support
     "200-1000": 7,
     "50-200": 5,
     "10-50": 3,
