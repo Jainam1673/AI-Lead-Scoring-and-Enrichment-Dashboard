@@ -90,74 +90,74 @@ export function LeadTable({ leads }: LeadTableProps) {
   };
 
   const getEmailStatusColor = (valid?: boolean) => {
-    if (valid === undefined) return 'text-gray-500';
-    return valid ? 'text-green-600' : 'text-red-600';
+    if (valid === undefined) return 'text-slate-500';
+    return valid ? 'text-green-400' : 'text-red-400';
   };
 
   return (
-    <div className="rounded-md border">
+    <div className="rounded-md border border-slate-800">
       <Table>
         <TableHeader>
-          <TableRow>
-            <TableHead>
+          <TableRow className="border-slate-800 hover:bg-slate-800/50">
+            <TableHead className="text-slate-300">
               <Button
                 variant="ghost"
                 onClick={() => handleSort('name')}
-                className="font-semibold"
+                className="font-semibold hover:bg-slate-700/50 hover:text-slate-100"
               >
                 Name
                 <SortIcon field="name" />
               </Button>
             </TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>
+            <TableHead className="text-slate-300">Email</TableHead>
+            <TableHead className="text-slate-300">
               <Button
                 variant="ghost"
                 onClick={() => handleSort('company')}
-                className="font-semibold"
+                className="font-semibold hover:bg-slate-700/50 hover:text-slate-100"
               >
                 Company
                 <SortIcon field="company" />
               </Button>
             </TableHead>
-            <TableHead>
+            <TableHead className="text-slate-300">
               <Button
                 variant="ghost"
                 onClick={() => handleSort('job_title')}
-                className="font-semibold"
+                className="font-semibold hover:bg-slate-700/50 hover:text-slate-100"
               >
                 Job Title
                 <SortIcon field="job_title" />
               </Button>
             </TableHead>
-            <TableHead>
+            <TableHead className="text-slate-300">
               <Button
                 variant="ghost"
                 onClick={() => handleSort('industry')}
-                className="font-semibold"
+                className="font-semibold hover:bg-slate-700/50 hover:text-slate-100"
               >
                 Industry
                 <SortIcon field="industry" />
               </Button>
             </TableHead>
-            <TableHead>
+            <TableHead className="text-slate-300">
               <Button
                 variant="ghost"
                 onClick={() => handleSort('company_size')}
-                className="font-semibold"
+                className="font-semibold hover:bg-slate-700/50 hover:text-slate-100"
               >
                 Size
                 <SortIcon field="company_size" />
               </Button>
             </TableHead>
-            <TableHead>Location</TableHead>
-            <TableHead>LinkedIn</TableHead>
-            <TableHead className="text-center">Email Valid</TableHead>
-            <TableHead>
+            <TableHead className="text-slate-300">Location</TableHead>
+            <TableHead className="text-slate-300">LinkedIn</TableHead>
+            <TableHead className="text-center text-slate-300">Email Valid</TableHead>
+            <TableHead className="text-slate-300">
               <Button
                 variant="ghost"
                 onClick={() => handleSort('score')}
-                className="font-semibold"
+                className="font-semibold hover:bg-slate-700/50 hover:text-slate-100"
               >
                 Score
                 <SortIcon field="score" />
@@ -167,37 +167,37 @@ export function LeadTable({ leads }: LeadTableProps) {
         </TableHeader>
         <TableBody>
           {sortedLeads.length === 0 ? (
-            <TableRow>
-              <TableCell colSpan={10} className="text-center text-muted-foreground">
+            <TableRow className="border-slate-800">
+              <TableCell colSpan={10} className="text-center text-slate-400">
                 No leads found. Upload a CSV to get started.
               </TableCell>
             </TableRow>
           ) : (
             sortedLeads.map((lead, index) => (
-              <TableRow key={lead.id || index}>
-                <TableCell className="font-medium">{lead.name}</TableCell>
-                <TableCell className="text-sm">{lead.email}</TableCell>
-                <TableCell>{lead.company}</TableCell>
-                <TableCell className="text-sm">{lead.job_title}</TableCell>
-                <TableCell className="text-sm capitalize">
+              <TableRow key={lead.id || index} className="border-slate-800 hover:bg-slate-800/30">
+                <TableCell className="font-medium text-slate-200">{lead.name}</TableCell>
+                <TableCell className="text-sm text-slate-300">{lead.email}</TableCell>
+                <TableCell className="text-slate-200">{lead.company}</TableCell>
+                <TableCell className="text-sm text-slate-300">{lead.job_title}</TableCell>
+                <TableCell className="text-sm capitalize text-slate-300">
                   {lead.industry || '-'}
                 </TableCell>
-                <TableCell className="text-sm">
+                <TableCell className="text-sm text-slate-300">
                   {lead.company_size || '-'}
                 </TableCell>
-                <TableCell className="text-sm">{lead.location || '-'}</TableCell>
+                <TableCell className="text-sm text-slate-300">{lead.location || '-'}</TableCell>
                 <TableCell>
                   {lead.linkedin_url ? (
                     <a
                       href={lead.linkedin_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-600 hover:text-blue-800 inline-flex items-center"
+                      className="text-blue-400 hover:text-cyan-400 inline-flex items-center transition-colors"
                     >
                       <ExternalLink className="h-4 w-4" />
                     </a>
                   ) : (
-                    '-'
+                    <span className="text-slate-500">-</span>
                   )}
                 </TableCell>
                 <TableCell className="text-center">

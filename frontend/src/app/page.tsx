@@ -136,26 +136,26 @@ export default function Home() {
   }, [filteredLeads]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
       <div className="container mx-auto p-6 space-y-6">
         {/* Header */}
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold tracking-tight">
+          <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
             AI Lead Scoring & Enrichment Dashboard
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-slate-400">
             Upload leads, enrich with company data, and prioritize with AI-powered scoring
           </p>
         </div>
 
         {/* Upload Section */}
-        <Card>
+        <Card className="border-slate-800 bg-slate-900/50 backdrop-blur">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Upload className="h-5 w-5" />
+            <CardTitle className="flex items-center gap-2 text-slate-100">
+              <Upload className="h-5 w-5 text-blue-400" />
               Upload & Process Leads
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-slate-400">
               Upload a CSV file with columns: name, email, company, job_title, location (optional), industry (optional)
             </CardDescription>
           </CardHeader>
@@ -193,44 +193,44 @@ export default function Home() {
         {/* Statistics Cards */}
         {leads.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <Card>
+            <Card className="border-slate-800 bg-slate-900/50 backdrop-blur">
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">
+                <CardTitle className="text-sm font-medium text-slate-400">
                   Total Leads
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold">{stats.total}</div>
+                <div className="text-3xl font-bold text-slate-100">{stats.total}</div>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="border-slate-800 bg-slate-900/50 backdrop-blur">
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">
+                <CardTitle className="text-sm font-medium text-slate-400">
                   Average Score
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold">{stats.avgScore.toFixed(1)}</div>
+                <div className="text-3xl font-bold text-slate-100">{stats.avgScore.toFixed(1)}</div>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="border-slate-800 bg-slate-900/50 backdrop-blur">
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">
+                <CardTitle className="text-sm font-medium text-slate-400">
                   High Quality (≥70)
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold text-green-600">{stats.highQuality}</div>
+                <div className="text-3xl font-bold text-green-400">{stats.highQuality}</div>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="border-slate-800 bg-slate-900/50 backdrop-blur">
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">
+                <CardTitle className="text-sm font-medium text-slate-400">
                   Valid Emails
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold text-blue-600">{stats.validEmails}</div>
+                <div className="text-3xl font-bold text-blue-400">{stats.validEmails}</div>
               </CardContent>
             </Card>
           </div>
@@ -245,13 +245,13 @@ export default function Home() {
 
           {/* Leads Table */}
           <div className="lg:col-span-3">
-            <Card>
+            <Card className="border-slate-800 bg-slate-900/50 backdrop-blur">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <BarChart3 className="h-5 w-5" />
+                <CardTitle className="flex items-center gap-2 text-slate-100">
+                  <BarChart3 className="h-5 w-5 text-cyan-400" />
                   Enriched & Scored Leads ({filteredLeads.length})
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-slate-400">
                   Click column headers to sort. All leads are enriched with company size, industry, and LinkedIn profiles.
                 </CardDescription>
               </CardHeader>
