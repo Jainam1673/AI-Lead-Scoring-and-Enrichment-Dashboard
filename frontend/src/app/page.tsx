@@ -1,27 +1,28 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-
-interface Lead {
-  id?: number;
-  name: string;
-  email: string;
-  company: string;
-  job_title: string;
-  industry?: string;
-  location?: string;
-  score?: number;
-  enriched_data?: object;
-}
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { LeadTable, Lead } from '@/components/LeadTable';
+import { FiltersPanel, FilterState } from '@/components/FiltersPanel';
+import { Upload, Download, RefreshCw, BarChart3 } from 'lucide-react';
 
 export default function Home() {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000';
   const [leads, setLeads] = useState<Lead[]>([]);
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
+  const [filters, setFilters] = useState<FilterState>({
+    searchTerm: '',
+    industry: '',
+    location: '',
+    minScore: 0,
+  });
+
+  const handleFiltersChange = (next: FilterState) => {
+    setFilters(next);
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -36,82 +37,231 @@ export default function Home() {
     formData.append('file', file);
 
     try {
-      const response = await fetch('http://localhost:8000/api/upload-leads', {
+  const response = await fetch(`${apiBaseUrl}/api/upload-leads`, {
         method: 'POST',
         body: formData,
       });
       if (response.ok) {
-        const data = await response.json();
-        setLeads(data);
+  const data: Lead[] = await response.json();
+  setLeads(data);
       } else {
-        alert('Upload failed');
+        const error = await response.json();
+        alert(`Upload failed: ${error.detail || 'Unknown error'}`);
       }
     } catch (error) {
       console.error(error);
-      alert('Error uploading file');
+      alert('Error uploading file. Make sure the backend is running on port 8000.');
     }
     setLoading(false);
   };
 
   const fetchLeads = async () => {
+    setLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/api/leads');
+  const response = await fetch(`${apiBaseUrl}/api/leads`);
       if (response.ok) {
-        const data = await response.json();
+        const data: Lead[] = await response.json();
         setLeads(data);
       }
     } catch (error) {
       console.error(error);
+      alert('Error fetching leads. Make sure the backend is running.');
+    }
+    setLoading(false);
+  };
+
+  const exportLeads = async () => {
+    try {
+  const response = await fetch(`${apiBaseUrl}/api/export`);
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'scored_leads.csv';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      } else {
+        alert('No leads to export');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Error exporting leads');
     }
   };
 
+  // Apply filters
+  const filteredLeads = useMemo(() => {
+    return leads.filter((lead) => {
+      // Search term filter
+      const searchLower = filters.searchTerm.toLowerCase();
+      const matchesSearch =
+        !filters.searchTerm ||
+        lead.name.toLowerCase().includes(searchLower) ||
+        lead.company.toLowerCase().includes(searchLower) ||
+        lead.job_title.toLowerCase().includes(searchLower);
+
+      // Industry filter
+      const matchesIndustry =
+        !filters.industry ||
+        (lead.industry?.toLowerCase().includes(filters.industry.toLowerCase()) ?? false);
+
+      // Location filter
+      const matchesLocation =
+        !filters.location ||
+        (lead.location?.toLowerCase().includes(filters.location.toLowerCase()) ?? false);
+
+      // Score filter
+      const matchesScore = lead.score >= filters.minScore;
+
+      return matchesSearch && matchesIndustry && matchesLocation && matchesScore;
+    });
+  }, [leads, filters]);
+
+  // Statistics
+  const stats = useMemo(() => {
+    if (filteredLeads.length === 0) {
+      return { total: 0, avgScore: 0, highQuality: 0, validEmails: 0 };
+    }
+
+    const total = filteredLeads.length;
+    const avgScore =
+      filteredLeads.reduce((sum, lead) => sum + lead.score, 0) / total;
+    const highQuality = filteredLeads.filter((lead) => lead.score >= 70).length;
+    const validEmails = filteredLeads.filter((lead) => lead.email_valid === true).length;
+
+    return { total, avgScore, highQuality, validEmails };
+  }, [filteredLeads]);
+
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">AI Lead Scoring Dashboard</h1>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+      <div className="container mx-auto p-6 space-y-6">
+        {/* Header */}
+        <div className="space-y-2">
+          <h1 className="text-4xl font-bold tracking-tight">
+            AI Lead Scoring & Enrichment Dashboard
+          </h1>
+          <p className="text-muted-foreground">
+            Upload leads, enrich with company data, and prioritize with AI-powered scoring
+          </p>
+        </div>
 
-      <Card className="mb-6">
-        <CardHeader>
-          <CardTitle>Upload Leads CSV</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Input type="file" accept=".csv" onChange={handleFileChange} className="mb-4" />
-          <Button onClick={uploadFile} disabled={!file || loading}>
-            {loading ? 'Uploading...' : 'Upload and Score'}
-          </Button>
-        </CardContent>
-      </Card>
+        {/* Upload Section */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Upload className="h-5 w-5" />
+              Upload & Process Leads
+            </CardTitle>
+            <CardDescription>
+              Upload a CSV file with columns: name, email, company, job_title, location (optional), industry (optional)
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex gap-4 items-end">
+              <div className="flex-1">
+                <Input
+                  type="file"
+                  accept=".csv"
+                  onChange={handleFileChange}
+                  disabled={loading}
+                />
+              </div>
+              <Button onClick={uploadFile} disabled={!file || loading} className="gap-2">
+                <Upload className="h-4 w-4" />
+                {loading ? 'Processing...' : 'Upload & Score'}
+              </Button>
+              <Button onClick={fetchLeads} variant="outline" disabled={loading} className="gap-2">
+                <RefreshCw className="h-4 w-4" />
+                Load Sample
+              </Button>
+              <Button
+                onClick={exportLeads}
+                variant="outline"
+                disabled={leads.length === 0}
+                className="gap-2"
+              >
+                <Download className="h-4 w-4" />
+                Export CSV
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
 
-      <Button onClick={fetchLeads} className="mb-4">Load Sample Leads</Button>
+        {/* Statistics Cards */}
+        {leads.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">
+                  Total Leads
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-3xl font-bold">{stats.total}</div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">
+                  Average Score
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-3xl font-bold">{stats.avgScore.toFixed(1)}</div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">
+                  High Quality (≥70)
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-3xl font-bold text-green-600">{stats.highQuality}</div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">
+                  Valid Emails
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-3xl font-bold text-blue-600">{stats.validEmails}</div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Scored Leads</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Name</TableHead>
-                <TableHead>Email</TableHead>
-                <TableHead>Company</TableHead>
-                <TableHead>Job Title</TableHead>
-                <TableHead>Score</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {leads.map((lead, index) => (
-                <TableRow key={lead.id || index}>
-                  <TableCell>{lead.name}</TableCell>
-                  <TableCell>{lead.email}</TableCell>
-                  <TableCell>{lead.company}</TableCell>
-                  <TableCell>{lead.job_title}</TableCell>
-                  <TableCell>{lead.score?.toFixed(2)}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+        {/* Main Content: Filters + Table */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          {/* Filters Sidebar */}
+          <div className="lg:col-span-1">
+            <FiltersPanel filters={filters} onFilterChange={handleFiltersChange} />
+          </div>
+
+          {/* Leads Table */}
+          <div className="lg:col-span-3">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <BarChart3 className="h-5 w-5" />
+                  Enriched & Scored Leads ({filteredLeads.length})
+                </CardTitle>
+                <CardDescription>
+                  Click column headers to sort. All leads are enriched with company size, industry, and LinkedIn profiles.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <LeadTable leads={filteredLeads} />
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
